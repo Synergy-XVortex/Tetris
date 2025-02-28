@@ -1,3 +1,3 @@
-public class Couleur {
+public enum Couleur {
 
 }

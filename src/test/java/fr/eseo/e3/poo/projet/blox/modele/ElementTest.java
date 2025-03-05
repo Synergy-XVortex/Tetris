@@ -1,61 +1,55 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ElementTest {
-    private Element element1;
-    private Element element2;
-
-    @BeforeEach
-    public void setUp() {
-        element1 = new Element(12, 7, Couleur.VIOLET);
-        element2 = new Element(new Coordonnees(5, 3), Couleur.BLEU);
-    }
 
     @Test
     public void testConstructeurAvecCoordonnees() {
-        Element element = new Element(new Coordonnees(4, 2));
-        assertEquals(4, element.getCoordonnees().getAbscisse());
-        assertEquals(2, element.getCoordonnees().getOrdonnee());
-        assertNotNull(element.getCouleur()); // Vérifie que la couleur n'est pas null
+        Coordonnees coord = new Coordonnees(3, 4);
+        Element elem = new Element(coord);
+        assertEquals(coord, elem.getCoordonnees(), "Les coordonnées doivent être (3,4)");
+        assertEquals(Couleur.values()[0], elem.getCouleur(), "La couleur par défaut doit être la première de l'énumération");
     }
 
     @Test
-    public void testConstructeurAvecCoordonneesEtCouleur() {
-        assertEquals(12, element1.getCoordonnees().getAbscisse());
-        assertEquals(7, element1.getCoordonnees().getOrdonnee());
-        assertEquals(Couleur.VIOLET, element1.getCouleur());
+    public void testConstructeurAvecValeurs() {
+        Element elem = new Element(1, 2, Couleur.ROUGE);
+        assertEquals(1, elem.getCoordonnees().getAbscisse(), "L'abscisse doit être 1");
+        assertEquals(2, elem.getCoordonnees().getOrdonnee(), "L'ordonnée doit être 2");
+        assertEquals(Couleur.ROUGE, elem.getCouleur(), "La couleur doit être ROUGE");
     }
 
     @Test
-    public void testGettersEtSetters() {
-        element1.setCoordonnees(new Coordonnees(8, 6));
-        element1.setCouleur(Couleur.ROUGE);
-        assertEquals(8, element1.getCoordonnees().getAbscisse());
-        assertEquals(6, element1.getCoordonnees().getOrdonnee());
-        assertEquals(Couleur.ROUGE, element1.getCouleur());
+    public void testSetters() {
+        Element elem = new Element(0, 0);
+        elem.setCoordonnees(new Coordonnees(5, 6));
+        elem.setCouleur(Couleur.BLEU);
+        assertEquals("(5, 6)", elem.getCoordonnees().toString(), "Les coordonnées doivent être (5,6)");
+        assertEquals(Couleur.BLEU, elem.getCouleur(), "La couleur doit être BLEU");
     }
 
     @Test
     public void testToString() {
-        assertEquals("(12,7)-VIOLET", element1.toString());
-        assertEquals("(5,3)-BLEU", element2.toString());
+        Element elem = new Element(7, 8, Couleur.VERT);
+        assertEquals("(7, 8) - VERT", elem.toString(), "La représentation en chaîne est incorrecte");
     }
 
     @Test
     public void testEquals() {
-        Element sameAsElement1 = new Element(12, 7, Couleur.VIOLET);
-        Element differentElement = new Element(10, 5, Couleur.ROUGE);
-        
-        assertEquals(element1, sameAsElement1);
-        assertNotEquals(element1, differentElement);
+        Element elem1 = new Element(2, 3, Couleur.CYAN);
+        Element elem2 = new Element(2, 3, Couleur.CYAN);
+        Element elem3 = new Element(1, 5, Couleur.ROUGE);
+
+        assertEquals(elem1, elem2, "Les éléments doivent être égaux");
+        assertNotEquals(elem1, elem3, "Les éléments ne doivent pas être égaux");
     }
 
     @Test
     public void testHashCode() {
-        Element sameAsElement1 = new Element(12, 7, Couleur.VIOLET);
-        assertEquals(element1.hashCode(), sameAsElement1.hashCode());
+        Element elem1 = new Element(2, 3, Couleur.CYAN);
+        Element elem2 = new Element(2, 3, Couleur.CYAN);
+        assertEquals(elem1.hashCode(), elem2.hashCode(), "Les hashCodes doivent être égaux");
     }
 }

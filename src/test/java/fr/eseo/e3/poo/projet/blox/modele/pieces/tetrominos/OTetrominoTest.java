@@ -1,30 +1,35 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+
+import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
+import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.Element;
 import org.junit.jupiter.api.Test;
 
-class OTetrominoTest {
-    private OTetromino oTetromino;
+public class OTetrominoTest {
 
-    @BeforeEach
-    void setUp() {
-        oTetromino = new OTetromino(0, 0);
+    @Test
+    public void testCreationOTetromino() {
+        Coordonnees coordRef = new Coordonnees(6, 5);
+        OTetromino oTetromino = new OTetromino(coordRef, Couleur.CYAN);
+        Element[] elements = oTetromino.getElements();
+
+        assertEquals(4, elements.length, "Un OTetromino doit contenir 4 éléments.");
+        assertEquals(new Element(6, 5, Couleur.CYAN), elements[0], "Mauvaise position pour l'élément 1.");
+        assertEquals(new Element(7, 5, Couleur.CYAN), elements[1], "Mauvaise position pour l'élément 2.");
+        assertEquals(new Element(6, 4, Couleur.CYAN), elements[2], "Mauvaise position pour l'élément 3.");
+        assertEquals(new Element(7, 4, Couleur.CYAN), elements[3], "Mauvaise position pour l'élément 4.");
     }
 
     @Test
-    void testInitialisation() {
-        Element[] elements = oTetromino.getElements();
-        assertNotNull(elements, "Les éléments ne doivent pas être null.");
-        assertEquals(4, elements.length, "OTetromino doit contenir 4 éléments.");
-        
-        assertEquals(0, elements[0].getX());
-        assertEquals(0, elements[0].getY());
-        assertEquals(1, elements[1].getX());
-        assertEquals(0, elements[1].getY());
-        assertEquals(0, elements[2].getX());
-        assertEquals(1, elements[2].getY());
-        assertEquals(1, elements[3].getX());
-        assertEquals(1, elements[3].getY());
+    public void testToString() {
+        OTetromino oTetromino = new OTetromino(new Coordonnees(6, 5), Couleur.CYAN);
+        String expected = "OTetromino :\n" +
+                "(6, 5) - CYAN\n" +
+                "(7, 5) - CYAN\n" +
+                "(6, 4) - CYAN\n" +
+                "(7, 4) - CYAN";
+        assertEquals(expected, oTetromino.toString(), "La sortie toString() ne correspond pas au format attendu.");
     }
 }

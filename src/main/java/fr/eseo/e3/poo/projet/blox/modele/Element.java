@@ -1,16 +1,19 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.util.Objects;
+
 public class Element {
+    
     private Coordonnees coordonnees;
     private Couleur couleur;
 
     // Constructeurs
     public Element(Coordonnees coordonnees) {
-        this(coordonnees, Couleur.values()[0]); // Utilisation de la première couleur par défaut
+        this(coordonnees, Couleur.values()[0]); // Première couleur de l'énumération
     }
 
     public Element(int abscisse, int ordonnee) {
-        this(new Coordonnees(abscisse, ordonnee), Couleur.values()[0]);
+        this(new Coordonnees(abscisse, ordonnee));
     }
 
     public Element(Coordonnees coordonnees, Couleur couleur) {
@@ -39,23 +42,23 @@ public class Element {
         this.couleur = couleur;
     }
 
-    // Méthode toString()
+    // Redéfinition de toString()
     @Override
     public String toString() {
-        return "(" + coordonnees.getAbscisse() + "," + coordonnees.getOrdonnee() + ")-" + couleur;
+        return coordonnees.toString() + " - " + couleur;
     }
 
-    // Redéfinition de equals et hashCode
+    // Redéfinition de equals() et hashCode()
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Element element = (Element) obj;
-        return coordonnees.equals(element.coordonnees) && couleur == element.couleur;
+        return Objects.equals(coordonnees, element.coordonnees) && couleur == element.couleur;
     }
 
     @Override
     public int hashCode() {
-        return coordonnees.hashCode() * 31 + couleur.hashCode();
+        return Objects.hash(coordonnees, couleur);
     }
 }

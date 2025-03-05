@@ -3,6 +3,7 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3.poo.projet.blox.modele.Element;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 public abstract class Tetromino implements Piece {
 

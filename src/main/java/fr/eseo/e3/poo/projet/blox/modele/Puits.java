@@ -1,6 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.pieces.Tetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
 
 public class Puits {
     // Constantes pour les dimensions par défaut

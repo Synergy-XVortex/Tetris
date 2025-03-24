@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.*;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ITetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.OTetromino;
 
 class PuitsTest {
 
@@ -48,15 +50,15 @@ class PuitsTest {
 
     @Test
     void testSetPieceSuivante() {
-        Piece piece = new OTetromino(new Coordonnees(5, 5));
+        Piece piece = new OTetromino(new Coordonnees(5, 5), Couleur.ROUGE);
         puits.setPieceSuivante(piece);
         assertEquals(piece, puits.getPieceSuivante(), "La pièce suivante n'est pas correcte");
     }
 
     @Test
     void testSetPieceSuivanteEtSuivante() {
-        Piece piece1 = new LTetromino(new Coordonnees(3, 3));
-        Piece piece2 = new ITetromino(new Coordonnees(4, 4));
+        Piece piece1 = new OTetromino(new Coordonnees(3, 3), Couleur.BLEU);
+        Piece piece2 = new ITetromino(new Coordonnees(4, 4), Couleur.VERT);
 
         puits.setPieceSuivante(piece1);
         assertEquals(piece1, puits.getPieceSuivante(), "La première pièce suivante est incorrecte");

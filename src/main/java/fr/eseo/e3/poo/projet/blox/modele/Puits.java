@@ -1,62 +1,61 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 public class Puits {
-    // Constantes pour les dimensions par défaut
+
     public static final int LARGEUR_PAR_DEFAUT = 10;
     public static final int PROFONDEUR_PAR_DEFAUT = 20;
 
     private int largeur;
     private int profondeur;
-    private Tetromino pieceCourante;
-    private Tetromino pieceSuivante;
+    private Piece pieceActuelle;
+    private Piece pieceSuivante;
 
-    // Constructeur avec valeurs par défaut
     public Puits() {
         this(LARGEUR_PAR_DEFAUT, PROFONDEUR_PAR_DEFAUT);
     }
 
-    // Constructeur avec paramètres
     public Puits(int largeur, int profondeur) {
-        if (largeur <= 0 || profondeur <= 0) {
-            throw new IllegalArgumentException("Largeur et profondeur doivent être positives.");
+        if (largeur < 5 || largeur > 15) {
+            throw new IllegalArgumentException("Largeur invalide : doit être entre 5 et 15.");
+        }
+        if (profondeur < 15 || profondeur > 25) {
+            throw new IllegalArgumentException("Profondeur invalide : doit être entre 15 et 25.");
         }
         this.largeur = largeur;
         this.profondeur = profondeur;
-        this.pieceCourante = null;
+        this.pieceActuelle = null;
         this.pieceSuivante = null;
     }
 
-    // Getters et setters
     public int getLargeur() {
-        return largeur;
+        return this.largeur;
     }
 
     public int getProfondeur() {
-        return profondeur;
+        return this.profondeur;
     }
 
-    public Tetromino getPieceCourante() {
-        return pieceCourante;
+    public Piece getPieceActuelle() {
+        return this.pieceActuelle;
     }
 
-    public void setPieceCourante(Tetromino pieceCourante) {
-        this.pieceCourante = pieceCourante;
+    public Piece getPieceSuivante() {
+        return this.pieceSuivante;
     }
 
-    public Tetromino getPieceSuivante() {
-        return pieceSuivante;
+    public void setPieceSuivante(Piece piece) {
+        this.pieceSuivante = piece;
     }
 
-    public void setPieceSuivante(Tetromino pieceSuivante) {
-        this.pieceSuivante = pieceSuivante;
+    public void setPieceSuivanteEtSuivante(Piece piece) {
+        this.pieceActuelle = this.pieceSuivante;
+        this.pieceSuivante = piece;
     }
 
-    // Affichage du puits
-    public void afficher() {
-        System.out.println("Puits : " + largeur + "x" + profondeur);
-        System.out.println("Pièce courante : " + (pieceCourante != null ? pieceCourante.getClass().getSimpleName() : "Aucune"));
-        System.out.println("Pièce suivante : " + (pieceSuivante != null ? pieceSuivante.getClass().getSimpleName() : "Aucune"));
+    @Override
+    public String toString() {
+        return "Puits : Dimension " + this.largeur + " x " + this.profondeur;
     }
 }

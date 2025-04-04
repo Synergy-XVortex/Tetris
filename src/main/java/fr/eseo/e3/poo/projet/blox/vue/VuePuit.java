@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Classe VuePuits : Affiche graphiquement le puits du jeu.
+ * Classe VuePuit : Affiche graphiquement le puits du jeu.
  */
-public class VuePuits extends JPanel {
+public class VuePuit extends JPanel {
 
     public static final int TAILLE_PAR_DEFAUT = 20; // Taille des cases en pixels
 
@@ -18,7 +18,7 @@ public class VuePuits extends JPanel {
     /**
      * Constructeur avec un puits et une taille de case personnalisée.
      */
-    public VuePuits(Puits puits, int taille) {
+    public VuePuit(Puits puits, int taille) {
         this.puits = puits;
         this.taille = taille;
         this.setPreferredSize(new Dimension(puits.getLargeur() * taille, puits.getProfondeur() * taille));
@@ -28,7 +28,7 @@ public class VuePuits extends JPanel {
     /**
      * Constructeur par défaut avec la taille prédéfinie.
      */
-    public VuePuits(Puits puits) {
+    public VuePuit(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
     }
 

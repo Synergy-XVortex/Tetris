@@ -1,27 +1,30 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
-import javax.swing.*;
-
-public class VuePuitTest {
-
-    /**
-     * Méthode principale pour tester l'affichage de VuePuit.
-     */
+public class VuePuitsTest {
+    
     public static void main(String[] args) {
-        // Création d'un puits de largeur 10 et profondeur 20
-        Puits puit = new Puits(10, 20);
+        SwingUtilities.invokeLater(() -> {
+            testVuePuits();
+        });
+    }
 
-        // Création de la vue associée
-        VuePuit vuePuit = new VuePuit(puit);
-
-        // Création de la fenêtre d'affichage
-        JFrame fenetre = new JFrame("Test VuePuit");
-        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(220, 420); // Ajusté en fonction de la taille des cases
-        fenetre.setLocationRelativeTo(null);
-        fenetre.setContentPane(vuePuit);
-        fenetre.setVisible(true);
+    private static void testVuePuits() {
+        // Création du modèle Puits
+        Puits puits = new Puits();
+        
+        // Création de la vue VuePuits
+        VuePuits vuePuits = new VuePuits(puits);
+        
+        // Création de la fenêtre JFrame
+        JFrame frame = new JFrame("Test VuePuits");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(vuePuits);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

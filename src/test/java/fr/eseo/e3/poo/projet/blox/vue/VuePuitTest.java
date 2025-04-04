@@ -4,7 +4,7 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public class VuePuitsTest {
+public class VuePuitTest {
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -17,7 +17,7 @@ public class VuePuitsTest {
         Puits puits = new Puits();
         
         // Création de la vue VuePuits
-        VuePuits vuePuits = new VuePuits(puits);
+        VuePuit vuePuits = new VuePuit(puits);
         
         // Création de la fenêtre JFrame
         JFrame frame = new JFrame("Test VuePuits");

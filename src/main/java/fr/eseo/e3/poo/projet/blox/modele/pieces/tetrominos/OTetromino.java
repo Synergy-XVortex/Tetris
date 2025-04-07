@@ -18,4 +18,15 @@ public class OTetromino extends Tetromino {
         elements[2] = new Element(coordonnees.getAbscisse(), coordonnees.getOrdonnee() - 1, couleur);
         elements[3] = new Element(coordonnees.getAbscisse() + 1, coordonnees.getOrdonnee() - 1, couleur);
     }
+
+    @Override
+    public void tourner(boolean sensHoraire) {
+        // Un OTetromino (forme carrée) ne change pas en tournant
+        // Donc, on ne fait rien ici
+    }
+
+    @Override
+    public Couleur getCouleur() {
+        return getCouleur();
+    }
 }

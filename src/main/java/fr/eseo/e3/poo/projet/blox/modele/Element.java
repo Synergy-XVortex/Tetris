@@ -61,4 +61,8 @@ public class Element {
     public int hashCode() {
         return Objects.hash(coordonnees, couleur);
     }
+
+    public void setCoordonnees(int abscisse, int ordonnee) {
+        this.coordonnees = new Coordonnees(abscisse, ordonnee);
+    }
 }

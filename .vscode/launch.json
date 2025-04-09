@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "VuePuitAvecDeuxPiecesTest",
+            "request": "launch",
+            "mainClass": "fr.eseo.e3.poo.projet.blox.vue.VuePuitAvecDeuxPiecesTest",
+            "projectName": "tetris"
+        },
+        {
+            "type": "java",
             "name": "VuePieceTest",
             "request": "launch",
             "mainClass": "fr.eseo.e3.poo.projet.blox.vue.VuePieceTest",

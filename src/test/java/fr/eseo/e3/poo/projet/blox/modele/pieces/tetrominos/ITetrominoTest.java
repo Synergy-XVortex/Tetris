@@ -32,4 +32,49 @@ public class ITetrominoTest {
                 "(7, 6) - ROUGE";
         assertEquals(expected, iTetromino.toString(), "La sortie toString() ne correspond pas au format attendu.");
     }
+
+    @Test
+    public void testDeplacementGauche() {
+        ITetromino piece = new ITetromino(new Coordonnees(5, 5), Couleur.CYAN);
+        piece.deplacerDe(-1, 0);
+        assertEquals(4, piece.getElements()[0].getCoordonnees().getAbscisse());
+    }
+
+    @Test
+    public void testDeplacementVersLeBas() {
+        ITetromino piece = new ITetromino(new Coordonnees(5, 5), Couleur.CYAN);
+        piece.deplacerDe(0, 1);
+        assertEquals(6, piece.getElements()[0].getCoordonnees().getOrdonnee());
+    }
+
+    @Test
+    public void testDeplacementInvalide() {
+        ITetromino piece = new ITetromino(new Coordonnees(5, 5), Couleur.CYAN);
+        assertThrows(IllegalArgumentException.class, () -> piece.deplacerDe(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> piece.deplacerDe(2, 0));
+    }
+
+    @Test
+    public void testRotationHoraire() {
+        ITetromino piece = new ITetromino(new Coordonnees(5, 5), Couleur.CYAN);
+        piece.tourner(true); // sens horaire
+
+        Element[] elements = piece.getElements();
+        assertEquals(new Coordonnees(5, 5), elements[0].getCoordonnees());
+        assertEquals(new Coordonnees(6, 5), elements[1].getCoordonnees());
+        assertEquals(new Coordonnees(4, 5), elements[2].getCoordonnees());
+        assertEquals(new Coordonnees(3, 5), elements[3].getCoordonnees());
+    }
+
+    @Test
+    public void testRotationAntiHoraire() {
+        ITetromino piece = new ITetromino(new Coordonnees(5, 5), Couleur.CYAN);
+        piece.tourner(false); // sens anti-horaire
+
+        Element[] elements = piece.getElements();
+        assertEquals(new Coordonnees(5, 5), elements[0].getCoordonnees());
+        assertEquals(new Coordonnees(4, 5), elements[1].getCoordonnees());
+        assertEquals(new Coordonnees(6, 5), elements[2].getCoordonnees());
+        assertEquals(new Coordonnees(7, 5), elements[3].getCoordonnees());
+    }
 }

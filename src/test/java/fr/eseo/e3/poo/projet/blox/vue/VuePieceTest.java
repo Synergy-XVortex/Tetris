@@ -14,7 +14,7 @@ public class VuePieceTest {
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Crée une pièce OTetromino avec une couleur
-        OTetromino oTetromino = new OTetromino(new Coordonnees(1, 1), Couleur.ROUGE);
+        OTetromino oTetromino = new OTetromino(new Coordonnees(1, 1), Couleur.CYAN);
 
         // Crée la vue associée à la pièce
         VuePiece vuePiece = new VuePiece(oTetromino, 30); // taille des cases : 30 px

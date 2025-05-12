@@ -52,4 +52,20 @@ public class ElementTest {
         Element elem2 = new Element(2, 3, Couleur.CYAN);
         assertEquals(elem1.hashCode(), elem2.hashCode(), "Les hashCodes doivent être égaux");
     }
+
+    @Test
+    public void testDeplacementValide() {
+        Element e = new Element(new Coordonnees(4, 5), Couleur.ROUGE);
+        e.deplacerDe(1, 1);
+        assertEquals(5, e.getCoordonnees().getAbscisse());
+        assertEquals(6, e.getCoordonnees().getOrdonnee());
+    }
+
+    @Test
+    public void testDeplacementNegatif() {
+        Element e = new Element(new Coordonnees(4, 5), Couleur.BLEU);
+        e.deplacerDe(-2, -3);
+        assertEquals(2, e.getCoordonnees().getAbscisse());
+        assertEquals(2, e.getCoordonnees().getOrdonnee());
+    }
 }

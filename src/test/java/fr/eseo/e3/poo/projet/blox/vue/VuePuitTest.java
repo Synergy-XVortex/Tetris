@@ -15,7 +15,7 @@ public class VuePuitTest {
         Puits puits = new Puits();
 
         // Crée une fenêtre avec VuePuit
-        VuePuit vuePuit = new VuePuit(puits, 30);
+        VuePuits vuePuit = new VuePuits(puits, 30);
         JFrame fenetre = new JFrame("Test VuePuit");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setContentPane(vuePuit);

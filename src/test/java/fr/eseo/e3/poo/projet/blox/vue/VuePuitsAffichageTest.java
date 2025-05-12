@@ -15,7 +15,7 @@ public class VuePuitsAffichageTest {
         Puits puits = new Puits();
 
         // 2. Création de la vue (VuePuit)
-        VuePuit vuePuit = new VuePuit(puits, 30);
+        VuePuits vuePuit = new VuePuits(puits, 30);
 
         // 3. Création de la fenêtre Swing
         JFrame fenetre = new JFrame("VuePuitsAffichageTest");

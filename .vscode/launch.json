@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PieceDeplacementTest",
+            "request": "launch",
+            "mainClass": "fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacementTest",
+            "projectName": "tetris"
+        },
+        {
+            "type": "java",
             "name": "VuePuitsAffichageTest",
             "request": "launch",
             "mainClass": "fr.eseo.e3.poo.projet.blox.vue.VuePuitsAffichageTest",

@@ -41,4 +41,18 @@ public abstract class Tetromino implements Piece {
         }
         return sb.toString().trim();
     }
+
+    @Override
+    public void deplacerDe(int deltaX, int deltaY) {
+    // On n'autorise QUE les déplacements gauche/droite/bas de 1 case
+    if (!((deltaX == 0 && deltaY == 1) || // bas
+          (deltaX == -1 && deltaY == 0) || // gauche
+          (deltaX == 1 && deltaY == 0))) { // droite
+        throw new IllegalArgumentException("Déplacement invalide : seul bas, gauche ou droite sont autorisés.");
+    }
+
+    for (Element element : elements) {
+        element.deplacerDe(deltaX, deltaY);
+    }
+    }
 }

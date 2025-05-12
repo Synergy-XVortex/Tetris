@@ -12,4 +12,7 @@ public interface Piece {
     Couleur getCouleur();
 
     void setPosition(int abscisse, int ordonnee);
+
+    void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException;
+
 }

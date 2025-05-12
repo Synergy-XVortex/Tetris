@@ -65,4 +65,10 @@ public class Element {
     public void setCoordonnees(int abscisse, int ordonnee) {
         this.coordonnees = new Coordonnees(abscisse, ordonnee);
     }
+
+    public void deplacerDe(int deltaX, int deltaY) {
+        int nouveauX = this.coordonnees.getAbscisse() + deltaX;
+        int nouveauY = this.coordonnees.getOrdonnee() + deltaY;
+        this.coordonnees = new Coordonnees(nouveauX, nouveauY);
+    }    
 }

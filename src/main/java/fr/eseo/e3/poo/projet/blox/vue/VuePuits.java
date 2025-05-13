@@ -2,7 +2,6 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
-import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +15,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private Puits puits;
     private int taille;
     private VuePiece vuePiece;
-    private PieceDeplacement pieceDeplacement;
 
-    /* ---------------- Constructeurs ---------------- */
+    /* ------------- Constructeurs ------------- */
+
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
     }
@@ -27,22 +26,22 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.puits = puits;
         this.taille = taille;
 
+        // Enregistre VuePuits comme observateur du Puits
+        this.puits.addPropertyChangeListener(this);
+
+        // Définit la taille du composant Swing en fonction du puits
         setPreferredSize(new Dimension(
                 puits.getLargeur() * taille,
                 puits.getProfondeur() * taille));
 
-        puits.addPropertyChangeListener(this);
-
+        // Initialise la VuePiece si déjà une pièce actuelle
         if (puits.getPieceActuelle() != null) {
-            setVuePiece(new VuePiece(puits.getPieceActuelle(), taille));
+            this.vuePiece = new VuePiece(puits.getPieceActuelle(), taille);
         }
-
-        // Ajoute le gestionnaire de mouvement de souris
-        this.pieceDeplacement = new PieceDeplacement(this);
-        this.addMouseMotionListener(pieceDeplacement);
     }
 
-    /* ---------------- Dessin ---------------- */
+    /* ------------- Affichage graphique ------------- */
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -62,23 +61,30 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private void dessinerPieceActuelle(Graphics g) {
         if (vuePiece != null) {
-            vuePiece.afficherPiece(g);
+            vuePiece.paintComponent(g); // Dessine les blocs de la pièce à la bonne position
         }
     }
 
-    /* --------- PropertyChangeListener --------- */
+    /* ------------- Réception des notifications ------------- */
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(evt.getPropertyName())) {
-            Piece nouvelle = (Piece) evt.getNewValue();
-            setVuePiece(new VuePiece(nouvelle, taille));
+            Piece nouvellePiece = (Piece) evt.getNewValue();
+            this.vuePiece = new VuePiece(nouvellePiece, taille);
             repaint();
         }
     }
 
-    /* ------------- Accesseurs utiles ------------- */
+    /* ------------- Accesseurs / Modificateurs ------------- */
+
     public int getTaille() {
         return taille;
+    }
+
+    public void setTaille(int taille) {
+        this.taille = taille;
+        repaint();
     }
 
     public Puits getPuits() {
@@ -89,11 +95,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         return vuePiece;
     }
 
-    public void setTaille(int taille) {
-        this.taille = taille;
-        repaint();
-    }
-
     public void setPuits(Puits nouveau) {
         if (this.puits != null) {
             this.puits.removePropertyChangeListener(this);
@@ -102,17 +103,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         if (nouveau != null) {
             nouveau.addPropertyChangeListener(this);
             if (nouveau.getPieceActuelle() != null) {
-                setVuePiece(new VuePiece(nouveau.getPieceActuelle(), taille));
+                this.vuePiece = new VuePiece(nouveau.getPieceActuelle(), taille);
             }
             repaint();
         }
-        if (this.pieceDeplacement != null) {
-            this.pieceDeplacement.setVuePuits(this);
-        }
-    }
-
-    /* ------------ Méthode privée ------------ */
-    private void setVuePiece(VuePiece vuePiece) {
-        this.vuePiece = vuePiece;
     }
 }

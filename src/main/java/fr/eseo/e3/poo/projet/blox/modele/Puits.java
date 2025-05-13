@@ -71,7 +71,7 @@ public class Puits {
             this.pieceActuelle = ancienneSuivante;
             /* centre la nouvelle actuelle en haut du puits */
             int centreX = this.largeur / 2;
-            this.pieceActuelle.setPosition(centreX, -4);
+            this.pieceActuelle.setPosition(centreX, 0);
             /* notification de la pieceActuelle */
             pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE,
                                    ancienneActuelle,

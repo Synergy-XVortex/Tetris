@@ -2,27 +2,39 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.*;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.OTetromino;
 
 import javax.swing.*;
+import java.awt.*;
 
+/**
+ * Classe de test pour l'affichage d'une VuePiece seule dans une fenêtre.
+ */
 public class VuePieceTest {
 
     public static void main(String[] args) {
-        // Crée une fenêtre
+        // Crée une pièce de type OTetromino centrée en (4, 5)
+        OTetromino piece = new OTetromino(new Coordonnees(4, 5), Couleur.ORANGE);
+
+        // Crée une VuePiece avec taille de bloc personnalisée
+        VuePiece vuePiece = new VuePiece(piece, 30);
+
+        // Crée une fenêtre pour afficher la pièce
         JFrame fenetre = new JFrame("Test VuePiece");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fenetre.setSize(400, 400);
+        fenetre.setLocationRelativeTo(null);
 
-        // Crée une pièce OTetromino avec une couleur
-        OTetromino oTetromino = new OTetromino(new Coordonnees(1, 1), Couleur.CYAN);
+        // Ajoute un panneau personnalisé qui appelle VuePiece.paintComponent()
+        JPanel panneau = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                vuePiece.paintComponent(g);
+            }
+        };
 
-        // Crée la vue associée à la pièce
-        VuePiece vuePiece = new VuePiece(oTetromino, 30); // taille des cases : 30 px
-
-        // Ajoute la vue dans la fenêtre
-        fenetre.add(vuePiece);
-        fenetre.pack();       // ajuste la taille
-        fenetre.setLocationRelativeTo(null); // centre la fenêtre
-        fenetre.setVisible(true); // affiche la fenêtre
+        fenetre.setContentPane(panneau);
+        fenetre.setVisible(true);
     }
 }

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CouleurTest",
+            "request": "launch",
+            "mainClass": "fr.eseo.e3.poo.projet.blox.modele.CouleurTest",
+            "projectName": "tetris"
+        },
+        {
+            "type": "java",
             "name": "PieceDeplacementTest",
             "request": "launch",
             "mainClass": "fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacementTest",

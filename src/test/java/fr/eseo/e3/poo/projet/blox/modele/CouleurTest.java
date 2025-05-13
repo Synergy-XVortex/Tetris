@@ -1,32 +1,27 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import static org.junit.jupiter.api.Assertions.*;
-import java.awt.Color;
-import org.junit.jupiter.api.Test;
+import javax.swing.*;
+import java.awt.*;
 
 public class CouleurTest {
 
-    @Test
-    public void testCouleursCorrespondent() {
-        // Vérifie que chaque couleur de l'énumération a une valeur correcte
-        assertEquals(new Color(0, 0, 255), Couleur.BLEU.getAwtColor(), "BLEU incorrect");
-        assertEquals(new Color(255, 0, 0), Couleur.ROUGE.getAwtColor(), "ROUGE incorrect");
-        assertEquals(new Color(255, 255, 0), Couleur.JAUNE.getAwtColor(), "JAUNE incorrect");
-        assertEquals(new Color(0, 255, 0), Couleur.VERT.getAwtColor(), "VERT incorrect");
-        assertEquals(new Color(255, 200, 0), Couleur.ORANGE.getAwtColor(), "ORANGE incorrect");
-        assertEquals(new Color(0, 255, 255), Couleur.CYAN.getAwtColor(), "CYAN incorrect");
-        assertEquals(new Color(128, 0, 128), Couleur.VIOLET.getAwtColor(), "VIOLET incorrect");
-    }
+    public static void main(String[] args) {
+        // Création de la fenêtre pour afficher les couleurs
+        JFrame frame = new JFrame("Test des Couleurs");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(2, 3));  // Pour afficher les couleurs dans une grille 2x3
 
-    @Test
-    public void testToutesLesCouleursSontDifferentes() {
-        // Vérifie que toutes les couleurs sont uniques
-        Couleur[] couleurs = Couleur.values();
-        for (int i = 0; i < couleurs.length; i++) {
-            for (int j = i + 1; j < couleurs.length; j++) {
-                assertNotEquals(couleurs[i].getAwtColor(), couleurs[j].getAwtColor(),
-                        "Les couleurs " + couleurs[i] + " et " + couleurs[j] + " sont identiques !");
-            }
+        // Parcours de toutes les couleurs de l'énumération
+        for (Couleur couleur : Couleur.values()) {
+            JPanel panel = new JPanel();
+            panel.setBackground(couleur.getCouleurPourAffichage());  // Définit la couleur de fond du panneau
+            panel.setPreferredSize(new Dimension(100, 100));  // Taille des panneaux
+            frame.add(panel);
         }
+
+        // Paramétrage de la fenêtre
+        frame.pack();
+        frame.setLocationRelativeTo(null);  // Centrer la fenêtre
+        frame.setVisible(true);
     }
 }

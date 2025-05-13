@@ -2,27 +2,35 @@ package fr.eseo.e3.poo.projet.blox.modele;
 
 import java.awt.Color;
 
-// Énumération représentant différentes couleurs utilisées dans le projet
+/**
+ * Enumération des couleurs possibles pour les pièces du jeu.
+ * Chaque valeur est associée à une couleur AWT pour l'affichage graphique.
+ */
 public enum Couleur {
-    // Définition des constantes de l'énumération avec leurs couleurs correspondantes en AWT
-    BLEU(Color.BLUE),
     ROUGE(Color.RED),
-    JAUNE(Color.YELLOW),
     VERT(Color.GREEN),
-    ORANGE(Color.ORANGE),
+    BLEU(Color.BLUE),
     CYAN(Color.CYAN),
-    VIOLET(new Color(128, 0, 128)); // VIOLET n'existe pas dans java.awt.Color, donc on le crée manuellement
+    JAUNE(Color.YELLOW),
+    ORANGE(Color.ORANGE);
 
-    // Champ privé associant chaque énumération à une couleur AWT
-    private final Color awtColor;
+    // Attribut de type Color de la bibliothèque AWT
+    private final Color couleurAWT;
 
-    // Constructeur privé pour l'énumération
-    Couleur(Color awtColor) {
-        this.awtColor = awtColor;
+    /**
+     * Constructeur associant chaque constante de l'énum à une couleur AWT.
+     * @param couleurAWT la couleur Java (AWT) associée
+     */
+    Couleur(Color couleurAWT) {
+        this.couleurAWT = couleurAWT;
     }
 
-    // Méthode d'accès pour obtenir la couleur AWT associée à l'énumération
-    public Color getAwtColor() {
-        return awtColor;
+    /**
+     * Accesseur permettant de récupérer la couleur AWT pour affichage.
+     * Cette méthode est utilisée dans les classes VuePiece et VuePuits.
+     * @return la couleur AWT correspondant à cette énumération
+     */
+    public Color getCouleurPourAffichage() {
+        return this.couleurAWT;
     }
 }

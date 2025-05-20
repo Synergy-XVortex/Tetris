@@ -4,10 +4,11 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 
-public class PieceDeplacement implements MouseMotionListener {
+public class PieceDeplacement extends MouseAdapter {
 
     private VuePuits vuePuits;
     private int lastColumn = -1;
@@ -27,11 +28,10 @@ public class PieceDeplacement implements MouseMotionListener {
             if (column != lastColumn) {
                 int delta = column - lastColumn;
                 try {
-                    // déplace la pièce de +1 (droite) ou -1 (gauche)
-                    piece.deplacerDe(delta, 0);
+                    piece.deplacerDe(delta, 0); // gauche/droite
                     vuePuits.repaint();
                 } catch (IllegalArgumentException e) {
-                    // déplacement invalide ignoré
+                    // déplacement invalide : on ignore
                 }
                 lastColumn = column;
             }
@@ -39,8 +39,23 @@ public class PieceDeplacement implements MouseMotionListener {
     }
 
     @Override
-    public void mouseDragged(MouseEvent event) {
-        // non utilisé pour l’instant
+    public void mouseWheelMoved(MouseWheelEvent event) {
+        Puits puits = vuePuits.getPuits();
+        Piece piece = puits.getPieceActuelle();
+
+        if (piece != null && event.getWheelRotation() > 0) {
+            try {
+                piece.deplacerDe(0, 1); // vers le bas
+                vuePuits.repaint();
+            } catch (IllegalArgumentException e) {
+                // collision ou hors limites, ignoré
+            }
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent event) {
+        lastColumn = -1; // Réinitialise pour éviter un déplacement involontaire
     }
 
     public void setVuePuits(VuePuits vuePuits) {

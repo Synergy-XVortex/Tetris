@@ -14,27 +14,30 @@ public class PieceDeplacementTest {
         // Crée un puits
         Puits puits = new Puits(10, 20);
 
-        // Crée une pièce OTetromino et la positionne
-        OTetromino piece = new OTetromino(new Coordonnees(4, 5), Couleur.ROUGE);
-        puits.setPieceSuivante(piece); // met en file d’attente
-        puits.setPieceSuivante(new OTetromino(new Coordonnees(4, 5), Couleur.BLEU)); // déclenche le passage dans pieceActuelle
+        // Ajoute une pièce
+        puits.setPieceSuivante(new OTetromino(new Coordonnees(4, 5), Couleur.ROUGE));
+        puits.setPieceSuivante(new OTetromino(new Coordonnees(4, 5), Couleur.BLEU));
 
-        // Crée une VuePuits pour afficher le puits
+        // Crée la vue du puits
         VuePuits vuePuits = new VuePuits(puits);
 
-        // 🔧 Ajoute le contrôleur de déplacement de la pièce à la souris
-        vuePuits.addMouseMotionListener(new PieceDeplacement(vuePuits));
+        // Crée un seul contrôleur
+        PieceDeplacement controleur = new PieceDeplacement(vuePuits);
 
-        // Crée une fenêtre JFrame
-        JFrame frame = new JFrame("Test Déplacement Horizontal de la Souris");
+        // Enregistre le contrôleur pour tous les événements souris
+        vuePuits.addMouseMotionListener(controleur);
+        vuePuits.addMouseListener(controleur);
+        vuePuits.addMouseWheelListener(controleur);
+
+        // Crée une fenêtre
+        JFrame frame = new JFrame("Test Déplacement Souris + Molette");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(vuePuits);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        
-        // Déclenche la mise à jour de la vue pour s'assurer que l'affichage est correct
-        vuePuits.repaint(); // Ajoutez cette ligne pour forcer un rafraîchissement de l'affichage
+
+        // Rafraîchissement initial
+        vuePuits.repaint();
     }
 }
-

@@ -74,15 +74,15 @@ public class Puits {
             this.pieceActuelle.setPosition(centreX, 0);
             /* notification de la pieceActuelle */
             pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE,
-                                   ancienneActuelle,
-                                   this.pieceActuelle);
+                                ancienneActuelle,
+                                this.pieceActuelle);
         }
 
         /* 2) la nouvelle pièce devient la « suivante » */
         this.pieceSuivante = nouvellePiece;
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE,
-                               ancienneSuivante,
-                               this.pieceSuivante);
+                            ancienneSuivante,
+                            this.pieceSuivante);
     }
 
     /* -------------- gestion des listeners ---------- */
@@ -99,9 +99,9 @@ public class Puits {
         StringBuilder sb = new StringBuilder(
             "Puits : Dimension " + largeur + " x " + profondeur + "\n");
         sb.append("Piece Actuelle : ")
-          .append(pieceActuelle == null ? "<aucune>" : pieceActuelle)
-          .append("\nPiece Suivante : ")
-          .append(pieceSuivante == null ? "<aucune>" : pieceSuivante);
+        .append(pieceActuelle == null ? "<aucune>" : pieceActuelle)
+        .append("\nPiece Suivante : ")
+        .append(pieceSuivante == null ? "<aucune>" : pieceSuivante);
         return sb.toString();
     }
 }
